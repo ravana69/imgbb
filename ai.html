@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Images</title>
+    <!-- Add Material Icons and Material Design CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body {
+            background-color: #121212; /* Dark background color */
+            color: #fff; /* Light text color */
+        }
+        #image-container {
+            text-align: center;
+        }
+        img {
+            max-width: 80%;
+            max-height: 80vh;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #2196F3; /* Material Design blue */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="image-container">
+            <img id="random-image" src="" alt="Random Image">
+        </div>
+        <button id="show-random" class="btn waves-effect waves-light">Show Random Image</button>
+    </div>
+
+    <script>
+        // JavaScript to fetch the .txt file and display random images
+        const imageContainer = document.getElementById('random-image');
+        const showRandomButton = document.getElementById('show-random');
+
+        showRandomButton.addEventListener('click', () => {
+            fetch('https://raw.githubusercontent.com/ravana69/imgbb/main/ai.txt')
+                .then(response => response.text())
+                .then(data => {
+                    const imageUrls = data.trim().split('\n');
+                    const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+                    imageContainer.src = randomImageUrl;
+                })
+                .catch(error => console.error('Error fetching image links:', error));
+        });
+    </script>
+
+    <!-- Load Materialize CSS and JavaScript for Material Design components -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
